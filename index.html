@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="YouTube Edit Takip Takvimi">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIllvdVR1YmUgRWRpdCBUYWtpcCIsCiAgInNob3J0X25hbWUiOiAiRWRpdCBUYWtpcCIsCiAgInN0YXJ0X3VybCI6ICIuLyIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiIzFhMWEyZSIsCiAgInRoZW1lX2NvbG9yIjogIiMxYTFhMmUiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMCAxMDAnJTNFJTNDcmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgZmlsbD0nJTIzMWExYTJlJy8lM0UlM0N0ZXh0IHg9JzUwJyB5PSc1NScgZm9udC1zaXplPSc1MCcgdGV4dC1hbmNob3I9J21pZGRsZScgZmlsbD0nJTIzNGVjZGM0JyUzRSVGMCU5RiU4RSVBQyUzQy90ZXh0JTNFJTNDL3N2ZyUzRSIsCiAgICAgICJzaXplcyI6ICIxOTJ4MTkyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0sCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3JlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIGZpbGw9JyUyMzFhMWEyZScvJTNFJTNDdGV4dCB4PSc1MCcgeT0nNTUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyUyMzRlY2RjNCclM0UlRjAlOUYlOEUlQUMlM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiNTEyeDUxMiIsCiAgICAgICJ0eXBlIjogImltYWdlL3N2Zyt4bWwiCiAgICB9CiAgXQp9">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231a1a2e'/%3E%3Ctext x='50' y='55' font-size='50' text-anchor='middle' fill='%234ecdc4'%3E🎬%3C/text%3E%3C/svg%3E">
+    <title>YouTube Edit Takip</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .install-prompt {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .install-prompt.show {
+            display: flex;
+        }
+
+        .install-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .close-install {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .countdown {
+            background: rgba(255, 107, 107, 0.2);
+            border: 2px solid #ff6b6b;
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .countdown h2 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #ff6b6b;
+        }
+
+        .countdown .time {
+            font-size: 2.5em;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .calendar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .day-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .day-card.completed {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .day-card.failed {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .day-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .day-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .day-label {
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .btn-fail {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+        }
+
+        .btn-undo {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 0.9em;
+            padding: 8px;
+        }
+
+        .points {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            min-height: 30px;
+        }
+
+        .points.positive {
+            color: #4ecdc4;
+        }
+
+        .points.negative {
+            color: #ff6b6b;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn-prev {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-btn-next {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .countdown .time {
+                font-size: 1.8em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .install-prompt {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="install-prompt" id="installPrompt">
+            <div>
+                <strong>📱 Uygulamayı Telefonuna Yükle!</strong><br>
+                <small>Offline çalışır, uygulama gibi kullanırsın</small>
+            </div>
+            <button class="install-btn" id="installBtn">Yükle</button>
+            <button class="close-install" id="closeInstall">×</button>
+        </div>
+
+        <div class="header">
+            <h1>🎬 YouTube Edit Takip Takvimi</h1>
+        </div>
+
+        <div class="countdown">
+            <h2>Güne Kalan Süre</h2>
+            <div class="time" id="countdown">--:--:--</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Toplam Puan</h3>
+                <p id="totalPoints">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Edit Yapılan Günler</h3>
+                <p id="completedDays">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Seri</h3>
+                <p id="streak">0</p>
+            </div>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+    </div>
+
+    <script>
+        // PWA Installation
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+        const closeInstall = document.getElementById('closeInstall');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.classList.add('show');
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                installPrompt.classList.remove('show');
+            }
+        });
+
+        closeInstall.addEventListener('click', () => {
+            installPrompt.classList.remove('show');
+        });
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICdlZGl0LXRyYWNrZXItdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsnLyddOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpLnRoZW4oY2FjaGUgPT4gY2FjaGUuYWRkQWxsKHVybHNUb0NhY2hlKSkKICApOwp9KTsKCnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignZmV0Y2gnLCBldmVudCA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4ocmVzcG9uc2UgPT4gcmVzcG9uc2UgfHwgZmV0Y2goZXZlbnQucmVxdWVzdCkpCiAgKTsKfSk7').catch(() => {});
+        }
+
+        const startDate = new Date(2026, 0, 12);
+        const totalDays = 31;
+        let dayData = {};
+        let currentDayIndex = 0;
+
+        function loadData() {
+            const saved = localStorage.getItem('editTrackerData');
+            if (saved) {
+                dayData = JSON.parse(saved);
+            }
+            const savedIndex = localStorage.getItem('currentDayIndex');
+            if (savedIndex !== null) {
+                currentDayIndex = parseInt(savedIndex);
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('editTrackerData', JSON.stringify(dayData));
+            localStorage.setItem('currentDayIndex', currentDayIndex.toString());
+        }
+
+        function getMonthName(month) {
+            const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 
+                          'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+            return months[month];
+        }
+
+        function createCalendar() {
+            const calendar = document.getElementById('calendar');
+            calendar.innerHTML = '';
+
+            const currentDate = new Date(startDate);
+            currentDate.setDate(startDate.getDate() + currentDayIndex);
+            const dateKey = currentDate.toISOString().split('T')[0];
+
+            const dayCard = document.createElement('div');
+            dayCard.className = 'day-card';
+            
+            if (dayData[dateKey]) {
+                if (dayData[dateKey] === 1) {
+                    dayCard.classList.add('completed');
+                } else if (dayData[dateKey] === -3) {
+                    dayCard.classList.add('failed');
+                }
+            }
+
+            const monthName = getMonthName(currentDate.getMonth());
+
+            dayCard.innerHTML = `
+                <div class="day-header">
+                    <div class="day-number">${currentDate.getDate()} ${monthName}</div>
+                    <div class="day-label">Edit Günü ${currentDayIndex + 1}/${totalDays}</div>
+                </div>
+                <div class="buttons">
+                    <button class="btn btn-success" onclick="markDay('${dateKey}', 1)">
+                        ✓ Yaptım (+1)
+                    </button>
+                    <button class="btn btn-fail" onclick="markDay('${dateKey}', -3)">
+                        ✗ Yapmadım (-3)
+                    </button>
+                    ${dayData[dateKey] ? '<button class="btn btn-undo" onclick="undoDay(\'' + dateKey + '\')">↶ Geri Al</button>' : ''}
+                </div>
+                <div class="points ${dayData[dateKey] ? (dayData[dateKey] > 0 ? 'positive' : 'negative') : ''}">
+                    ${dayData[dateKey] ? (dayData[dateKey] > 0 ? '+' + dayData[dateKey] : dayData[dateKey]) : ''}
+                </div>
+            `;
+
+            calendar.appendChild(dayCard);
+
+            const navDiv = document.createElement('div');
+            navDiv.className = 'nav-buttons';
+            
+            if (currentDayIndex > 0) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'nav-btn nav-btn-prev';
+                prevBtn.textContent = '← Önceki Gün';
+                prevBtn.onclick = () => {
+                    currentDayIndex--;
+                    saveData();
+                    createCalendar();
+                };
+                navDiv.appendChild(prevBtn);
+            }
+
+            if (currentDayIndex < totalDays - 1) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'nav-btn nav-btn-next';
+                nextBtn.textContent = 'Sıradaki Gün →';
+                nextBtn.onclick = () => {
+                    currentDayIndex++;
+                    saveData();
+                    createCalendar();
+                };
+                navDiv.appendChild(nextBtn);
+            }
+
+            calendar.appendChild(navDiv);
+        }
+
+        function markDay(dateKey, points) {
+            dayData[dateKey] = points;
+            saveData();
+            createCalendar();
+            updateStats();
+        }
+
+        function undoDay(dateKey) {
+            delete dayData[dateKey];
+            saveData();
+            createCalendar();
+            updateStats();
+        }
+
+        function updateStats() {
+            let totalPoints = 0;
+            let completedDays = 0;
+            let currentStreak = 0;
+
+            for (let key in dayData) {
+                totalPoints += dayData[key];
+                if (dayData[key] === 1) completedDays++;
+            }
+
+            let streakCount = 0;
+            for (let i = 0; i <= currentDayIndex; i++) {
+                const checkDate = new Date(startDate);
+                checkDate.setDate(startDate.getDate() + i);
+                const dateKey = checkDate.toISOString().split('T')[0];
+                
+                if (dayData[dateKey] === 1) {
+                    streakCount++;
+                } else if (dayData[dateKey] === -3) {
+                    streakCount = 0;
+                }
+            }
+
+            document.getElementById('totalPoints').textContent = totalPoints;
+            document.getElementById('completedDays').textContent = completedDays;
+            document.getElementById('streak').textContent = streakCount + ' gün';
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const turkeyTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+            const tomorrow = new Date(turkeyTime);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const diff = tomorrow - turkeyTime;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        loadData();
+        createCalendar();
+        updateStats();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
