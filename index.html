@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0f">
     <title>🎬 YouTube Edit Takip 2026</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiWW91VHViZSBFZGl0IFRha2lwIDIwMjYiLCJzaG9ydF9uYW1lIjoiRWRpdCBUYWtpcCIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBhMGEwZiIsInRoZW1lX2NvbG9yIjoiIzAwZmY4OCIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWwsJTNDc3ZnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zycgdmlld0JveD0nMCAwIDEwMCAxMDAnJTNFJTNDcmVjdCB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCcgZmlsbD0nJTIzMGEwYTBmJyByeD0nMjAnLyUzRSUzQ3RleHQgeD0nNTAnIHk9JzU1JyBmb250LXNpemU9JzUwJyB0ZXh0LWFuY2hvcj0nbWlkZGxlJyBmaWxsPSclMjMwMGZmODgnJTNFJUYwJTlGJThFJUFDJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifSx7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCclM0UlM0NyZWN0IHdpZHRoPScxMDAnIGhlaWdodD0nMTAwJyBmaWxsPSclMjMwYTBhMGYnIHJ4PScyMCcvJTNFJTNDdGV4dCB4PSc1MCcgeT0nNTUnIGZvbnQtc2l6ZT0nNTAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZpbGw9JyUyMzAwZmY4OCclM0UlRjAlOUYlOEUlQUMlM0MvdGV4dCUzRSUzQy9zdmclM0UiLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0f' rx='20'/%3E%3Ctext x='50' y='55' font-size='50' text-anchor='middle' fill='%2300ff88'%3E🎬%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -34,6 +36,75 @@
             color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* ─── INSTALL PROMPT ─── */
+        .install-banner {
+            display: none;
+            align-items: center;
+            gap: 14px;
+            background: linear-gradient(135deg, rgba(0,255,136,0.12), rgba(68,136,255,0.12));
+            border: 1px solid rgba(0,255,136,0.3);
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .install-banner.show { display: flex; }
+
+        .install-banner-text {
+            flex: 1;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text);
+        }
+
+        .install-banner-text strong {
+            color: var(--green);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .install-banner-text span {
+            color: var(--muted);
+            font-size: 0.65rem;
+        }
+
+        .install-btn-yes {
+            background: var(--green);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .install-btn-yes:hover {
+            box-shadow: 0 0 16px rgba(0,255,136,0.4);
+        }
+
+        .install-btn-close {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .install-btn-close:hover {
+            border-color: var(--red);
+            color: var(--red);
         }
 
         /* Animated background grid */
@@ -940,6 +1011,17 @@
 
 <div class="page">
 
+    <!-- INSTALL PROMPT -->
+    <div class="install-banner" id="installBanner">
+        <div style="font-size:1.5rem">📱</div>
+        <div class="install-banner-text">
+            <strong>Uygulamayı Telefonuna Yükle!</strong>
+            <span>Offline çalışır · Ana ekrana ekle · Uygulama gibi kullan</span>
+        </div>
+        <button class="install-btn-yes" id="installBtn">Yükle</button>
+        <button class="install-btn-close" id="installClose">✕</button>
+    </div>
+
     <!-- HEADER -->
     <div class="header">
         <div class="header-left">
@@ -1599,6 +1681,69 @@ function showToast(msg, type = 'info') {
     t.textContent = msg;
     t.className = `toast ${type} show`;
     toastTimeout = setTimeout(() => { t.classList.remove('show'); }, 2800);
+}
+
+// ─── PWA ─────────────────────────────────────────────────────────────────────
+
+let deferredPrompt = null;
+const installBanner = document.getElementById('installBanner');
+const installBtn = document.getElementById('installBtn');
+const installClose = document.getElementById('installClose');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBanner.classList.add('show');
+});
+
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        installBanner.classList.remove('show');
+        if (outcome === 'accepted') showToast('🎉 Uygulama yüklendi!', 'success');
+    }
+});
+
+installClose.addEventListener('click', () => {
+    installBanner.classList.remove('show');
+});
+
+window.addEventListener('appinstalled', () => {
+    installBanner.classList.remove('show');
+    showToast('✅ Ana ekrana eklendi!', 'success');
+});
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+    const swCode = `
+const CACHE = 'edit-tracker-2026-v1';
+const URLS = ['./'];
+
+self.addEventListener('install', e => {
+    e.waitUntil(caches.open(CACHE).then(c => c.addAll(URLS)));
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', e => {
+    e.waitUntil(
+        caches.keys().then(keys =>
+            Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+        )
+    );
+    self.clients.claim();
+});
+
+self.addEventListener('fetch', e => {
+    e.respondWith(
+        caches.match(e.request).then(r => r || fetch(e.request).catch(() => caches.match('./')))
+    );
+});
+    `;
+    const blob = new Blob([swCode], { type: 'text/javascript' });
+    const swUrl = URL.createObjectURL(blob);
+    navigator.serviceWorker.register(swUrl).catch(() => {});
 }
 
 // ─── INIT ────────────────────────────────────────────────────────────────────
