@@ -191,6 +191,83 @@
             opacity: 0.15;
         }
 
+        /* ─── YT STUDIO BUTTON ─── */
+        .yt-studio-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            border: 2px solid rgba(255,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 50;
+            text-decoration: none;
+        }
+
+        .yt-studio-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255,0,0,0.5);
+        }
+
+        .yt-studio-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* ─── LAST VIDEO INDICATOR ─── */
+        .last-video-card {
+            background: linear-gradient(135deg, rgba(68,136,255,0.08), rgba(0,255,136,0.08));
+            border: 1px solid rgba(68,136,255,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .last-video-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .last-video-content {
+            flex: 1;
+        }
+
+        .last-video-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 4px;
+        }
+
+        .last-video-time {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.05em;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-video-subtext {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
         /* ─── LIVE CLOCK STRIP ─── */
         .clock-strip {
             display: flex;
@@ -571,6 +648,17 @@
         .cal-day.done .day-pts { color: var(--green); }
         .cal-day.failed .day-pts { color: var(--red); }
 
+        .cal-day .badges {
+            display: flex;
+            gap: 3px;
+            margin-top: 2px;
+        }
+
+        .cal-day .badge {
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+
         /* ─── LIST VIEW ─── */
         .list-view {
             display: none;
@@ -877,6 +965,44 @@
             font-size: 0.75rem;
         }
 
+        .modal-btn.video {
+            background: linear-gradient(135deg, rgba(68,136,255,0.15), rgba(68,136,255,0.08));
+            border: 1px solid rgba(68,136,255,0.3);
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .modal-btn.video:hover {
+            background: linear-gradient(135deg, rgba(68,136,255,0.25), rgba(68,136,255,0.15));
+            border-color: var(--blue);
+        }
+
+        .modal-btn.video.active {
+            background: var(--blue);
+            color: #000;
+            border-color: var(--blue);
+            box-shadow: 0 0 20px rgba(68,136,255,0.4);
+        }
+
+        .modal-btn.project {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.08));
+            border: 1px solid rgba(255,215,0,0.3);
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .modal-btn.project:hover {
+            background: linear-gradient(135deg, rgba(255,215,0,0.25), rgba(255,215,0,0.15));
+            border-color: var(--gold);
+        }
+
+        .modal-btn.project.active {
+            background: var(--gold);
+            color: #000;
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(255,215,0,0.4);
+        }
+
         /* ─── HEATMAP ─── */
         .heatmap-view {
             display: none;
@@ -984,6 +1110,13 @@
             .cal-day .day-pts { display: none; }
             .day-list-item { grid-template-columns: 60px 1fr auto; }
             .day-list-item .dl-status { display: none; }
+            .yt-studio-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                font-size: 1.5rem;
+            }
         }
 
         /* Scroll animation */
@@ -1029,6 +1162,16 @@
             <div class="subtitle">// 365 GÜN — TAM YIL TAKVİMİ — 2026</div>
         </div>
         <div class="year-badge">2026</div>
+    </div>
+
+    <!-- LAST VIDEO CARD -->
+    <div class="last-video-card" id="lastVideoCard">
+        <div class="last-video-icon">🎥</div>
+        <div class="last-video-content">
+            <div class="last-video-label">Son Video Yayınlandı</div>
+            <div class="last-video-time" id="lastVideoTime">Henüz video yok</div>
+            <div class="last-video-subtext" id="lastVideoSub">İlk videonu yayınla!</div>
+        </div>
     </div>
 
     <!-- CLOCK STRIP -->
@@ -1165,6 +1308,11 @@
     </div>
 </div>
 
+<!-- ─── YT STUDIO BUTTON ─── -->
+<a href="https://studio.youtube.com" target="_blank" class="yt-studio-btn" title="YouTube Studio'yu Aç">
+    ▶️
+</a>
+
 <!-- ─── TOAST ─── -->
 <div class="toast" id="toast"></div>
 
@@ -1176,20 +1324,38 @@ const MONTHS_TR = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran',
 const DAYS_TR = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
 const YEAR = 2026;
 
-let dayData = {};       // 'YYYY-MM-DD' -> 1 (done) | -3 (failed)
+let dayData = {};       // 'YYYY-MM-DD' -> { edit: 1|-3|null, video: true|false, project: true|false }
 let currentMonth = 0;  // 0-11
 let activeTab = 'calendar';
 let selectedDateKey = null;
+let lastVideoDate = null; // Son video yayınlanan tarih
 
 function load() {
     const saved = localStorage.getItem('ytEditTracker2026');
     if (saved) {
-        try { dayData = JSON.parse(saved); } catch(e) { dayData = {}; }
+        try { 
+            const loaded = JSON.parse(saved);
+            // Eski formatı yeniye dönüştür
+            dayData = {};
+            for (let k in loaded) {
+                if (typeof loaded[k] === 'number') {
+                    dayData[k] = { edit: loaded[k], video: false, project: false };
+                } else {
+                    dayData[k] = loaded[k];
+                }
+            }
+        } catch(e) { dayData = {}; }
     }
+    
+    const savedLastVideo = localStorage.getItem('lastVideoDate');
+    if (savedLastVideo) lastVideoDate = savedLastVideo;
 }
 
 function save() {
     localStorage.setItem('ytEditTracker2026', JSON.stringify(dayData));
+    if (lastVideoDate) {
+        localStorage.setItem('lastVideoDate', lastVideoDate);
+    }
 }
 
 // ─── UTILITIES ───────────────────────────────────────────────────────────────
@@ -1224,33 +1390,38 @@ function getFirstDayOfMonth(year, month) {
 // ─── STATS ───────────────────────────────────────────────────────────────────
 
 function computeStats() {
-    let totalPoints = 0, done = 0, failed = 0;
+    let totalPoints = 0, done = 0, failed = 0, videos = 0, projects = 0;
     let currentStreak = 0, bestStreak = 0, tempStreak = 0;
     const todayKey = getTodayKey();
 
     // iterate all 365 days
-    let prevKey = null;
     for (let m = 0; m < 12; m++) {
         const dim = getDaysInMonth(YEAR, m);
         for (let d = 1; d <= dim; d++) {
             const k = dateKey(YEAR, m, d);
             const v = dayData[k];
             if (k > todayKey) continue; // future
-            if (v === 1) {
-                totalPoints += 1;
-                done++;
-                tempStreak++;
-                if (tempStreak > bestStreak) bestStreak = tempStreak;
-            } else if (v === -3) {
-                totalPoints -= 3;
-                failed++;
-                tempStreak = 0;
+            
+            if (v) {
+                if (v.edit === 1) {
+                    totalPoints += 1;
+                    done++;
+                    tempStreak++;
+                    if (tempStreak > bestStreak) bestStreak = tempStreak;
+                } else if (v.edit === -3) {
+                    totalPoints -= 3;
+                    failed++;
+                    tempStreak = 0;
+                }
+                
+                if (v.video) videos++;
+                if (v.project) projects++;
             }
         }
     }
     currentStreak = tempStreak;
 
-    return { totalPoints, done, failed, currentStreak, bestStreak };
+    return { totalPoints, done, failed, currentStreak, bestStreak, videos, projects };
 }
 
 function updateStats() {
@@ -1278,6 +1449,7 @@ function updateStats() {
     document.getElementById('yearProgressBar').style.width = yearPct + '%';
 
     buildMonthDots();
+    updateLastVideoIndicator();
 }
 
 function buildMonthDots() {
@@ -1324,6 +1496,42 @@ function buildMonthDots() {
         wrap.appendChild(label);
         wrap.appendChild(dot);
         container.appendChild(wrap);
+    }
+}
+
+function updateLastVideoIndicator() {
+    const timeEl = document.getElementById('lastVideoTime');
+    const subEl = document.getElementById('lastVideoSub');
+    
+    if (!lastVideoDate) {
+        timeEl.textContent = 'Henüz video yok';
+        subEl.textContent = 'İlk videonu yayınla! 🎬';
+        return;
+    }
+    
+    const todayKey = getTodayKey();
+    const lastDate = new Date(lastVideoDate);
+    const today = new Date(todayKey);
+    const diffTime = today - lastDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) {
+        timeEl.textContent = 'Bugün';
+        subEl.textContent = '🔥 Taze içerik!';
+    } else if (diffDays === 1) {
+        timeEl.textContent = '1 gün önce';
+        subEl.textContent = '✨ Dünkü video';
+    } else if (diffDays < 7) {
+        timeEl.textContent = `${diffDays} gün önce`;
+        subEl.textContent = '💪 Aktif';
+    } else if (diffDays < 30) {
+        const weeks = Math.floor(diffDays / 7);
+        timeEl.textContent = `${weeks} hafta önce`;
+        subEl.textContent = '⏰ Yeni video zamanı!';
+    } else {
+        const months = Math.floor(diffDays / 30);
+        timeEl.textContent = `${months} ay önce`;
+        subEl.textContent = '🚨 Video gerekiyor!';
     }
 }
 
@@ -1404,15 +1612,21 @@ function renderCalendar() {
         if (k === todayKey) cell.classList.add('today');
         else if (k > todayKey) cell.classList.add('future');
 
-        if (dayData[k] === 1) cell.classList.add('done');
-        else if (dayData[k] === -3) cell.classList.add('failed');
+        const data = dayData[k];
+        if (data && data.edit === 1) cell.classList.add('done');
+        else if (data && data.edit === -3) cell.classList.add('failed');
 
-        const icon = dayData[k] === 1 ? '✓' : dayData[k] === -3 ? '✕' : (k === todayKey ? '📍' : '');
-        const ptsText = dayData[k] === 1 ? '+1pt' : dayData[k] === -3 ? '-3pt' : '';
+        const icon = data && data.edit === 1 ? '✓' : data && data.edit === -3 ? '✕' : (k === todayKey ? '📍' : '');
+        const ptsText = data && data.edit === 1 ? '+1pt' : data && data.edit === -3 ? '-3pt' : '';
+        
+        const badges = [];
+        if (data && data.video) badges.push('📹');
+        if (data && data.project) badges.push('🔨');
 
         cell.innerHTML = `
             <div class="day-num">${d}</div>
             ${icon ? `<div class="day-icon">${icon}</div>` : ''}
+            ${badges.length ? `<div class="badges">${badges.map(b => `<span class="badge">${b}</span>`).join('')}</div>` : ''}
             ${ptsText ? `<div class="day-pts">${ptsText}</div>` : ''}
         `;
 
@@ -1444,21 +1658,26 @@ function renderList() {
         const item = document.createElement('div');
         item.className = 'day-list-item';
 
+        const data = dayData[k];
         if (k === todayKey) item.classList.add('today');
-        else if (dayData[k] === 1) item.classList.add('done');
-        else if (dayData[k] === -3) item.classList.add('failed');
+        else if (data && data.edit === 1) item.classList.add('done');
+        else if (data && data.edit === -3) item.classList.add('failed');
 
-        const statusText = dayData[k] === 1 ? '✓ YAPILDI' : dayData[k] === -3 ? '✕ YAPILMADI' : '— BEKLİYOR';
-        const pts = dayData[k] === 1 ? '+1' : dayData[k] === -3 ? '-3' : '?';
+        const statusText = data && data.edit === 1 ? '✓ YAPILDI' : data && data.edit === -3 ? '✕ YAPILMADI' : '— BEKLİYOR';
+        const pts = data && data.edit === 1 ? '+1' : data && data.edit === -3 ? '-3' : '?';
+        
+        const badges = [];
+        if (data && data.video) badges.push('📹');
+        if (data && data.project) badges.push('🔨');
 
         item.innerHTML = `
             <div class="dl-date">
                 <div style="font-size:1rem;font-weight:700;color:var(--text)">${d}</div>
                 <div>${dayName.substring(0,3).toUpperCase()}</div>
             </div>
-            <div class="dl-num">${d} ${MONTHS_TR[currentMonth]}</div>
+            <div class="dl-num">${d} ${MONTHS_TR[currentMonth]} ${badges.join(' ')}</div>
             <div class="dl-status">${statusText}</div>
-            <div class="dl-pts">${dayData[k] ? pts : ''}</div>
+            <div class="dl-pts">${data && data.edit ? pts : ''}</div>
         `;
 
         item.onclick = () => openModal(k);
@@ -1504,9 +1723,10 @@ function renderOverview() {
             const dot = document.createElement('div');
             dot.className = 'month-mini-dot';
 
+            const data = dayData[k];
             if (k === todayKey) dot.classList.add('today');
-            else if (dayData[k] === 1) { dot.classList.add('done'); doneCnt++; }
-            else if (dayData[k] === -3) { dot.classList.add('failed'); failedCnt++; }
+            else if (data && data.edit === 1) { dot.classList.add('done'); doneCnt++; }
+            else if (data && data.edit === -3) { dot.classList.add('failed'); failedCnt++; }
 
             if (k <= todayKey) totalPassed++;
 
@@ -1573,9 +1793,11 @@ function renderHeatmap() {
             } else {
                 const k = allDays[dayIndex];
                 cell.className = 'heatmap-cell';
+                const data = dayData[k];
+                
                 if (k === todayKey) cell.classList.add('today');
-                if (dayData[k] === 1) cell.classList.add('done');
-                else if (dayData[k] === -3) cell.classList.add('failed');
+                if (data && data.edit === 1) cell.classList.add('done');
+                else if (data && data.edit === -3) cell.classList.add('failed');
 
                 if (k <= todayKey) {
                     cell.title = k;
@@ -1605,12 +1827,12 @@ function openModal(k) {
     document.getElementById('modalSub').textContent = `${dayName.toUpperCase()} · GÜN ${doy}/365`;
 
     const statusEl = document.getElementById('modalStatus');
-    const v = dayData[k];
+    const data = dayData[k] || { edit: null, video: false, project: false };
 
-    if (v === 1) {
+    if (data.edit === 1) {
         statusEl.className = 'modal-status done';
         statusEl.textContent = '✓ Bu gün edit yapıldı · +1 puan';
-    } else if (v === -3) {
+    } else if (data.edit === -3) {
         statusEl.className = 'modal-status failed';
         statusEl.textContent = '✕ Bu gün edit yapılmadı · -3 puan';
     } else {
@@ -1621,7 +1843,7 @@ function openModal(k) {
     const buttons = document.getElementById('modalButtons');
     buttons.innerHTML = '';
 
-    if (!v) {
+    if (!data.edit) {
         const btnDone = document.createElement('button');
         btnDone.className = 'modal-btn success';
         btnDone.innerHTML = '🎬 Yaptım — +1 Puan';
@@ -1641,6 +1863,20 @@ function openModal(k) {
         buttons.appendChild(btnUndo);
     }
 
+    // Video butonu
+    const btnVideo = document.createElement('button');
+    btnVideo.className = 'modal-btn video' + (data.video ? ' active' : '');
+    btnVideo.innerHTML = data.video ? '📹 Video Yayınlandı ✓' : '📹 Video Yayınladım';
+    btnVideo.onclick = () => toggleVideo(k);
+    buttons.appendChild(btnVideo);
+
+    // Proje butonu
+    const btnProject = document.createElement('button');
+    btnProject.className = 'modal-btn project' + (data.project ? ' active' : '');
+    btnProject.innerHTML = data.project ? '🔨 Proje Tamamlandı ✓' : '🔨 Proje Yapıyorum';
+    btnProject.onclick = () => toggleProject(k);
+    buttons.appendChild(btnProject);
+
     document.getElementById('modalOverlay').classList.add('open');
 }
 
@@ -1653,7 +1889,8 @@ function closeModalDirect() {
 }
 
 function markDay(k, points) {
-    dayData[k] = points;
+    if (!dayData[k]) dayData[k] = { edit: null, video: false, project: false };
+    dayData[k].edit = points;
     save();
     closeModalDirect();
     updateStats();
@@ -1663,12 +1900,45 @@ function markDay(k, points) {
 }
 
 function undoDay(k) {
-    delete dayData[k];
+    if (dayData[k]) {
+        dayData[k].edit = null;
+        // Video ve proje varsa tutuyoruz, sadece edit'i sıfırlıyoruz
+        if (!dayData[k].video && !dayData[k].project) {
+            delete dayData[k];
+        }
+    }
     save();
     closeModalDirect();
     updateStats();
     renderCurrentTab();
     showToast('↶ İşaret kaldırıldı', 'info');
+}
+
+function toggleVideo(k) {
+    if (!dayData[k]) dayData[k] = { edit: null, video: false, project: false };
+    dayData[k].video = !dayData[k].video;
+    
+    if (dayData[k].video) {
+        lastVideoDate = k;
+    }
+    
+    save();
+    updateStats();
+    renderCurrentTab();
+    openModal(k); // Modal'ı refresh et
+    showToast(dayData[k].video ? '📹 Video yayınlandı olarak işaretlendi!' : '📹 Video işareti kaldırıldı', 
+              dayData[k].video ? 'success' : 'info');
+}
+
+function toggleProject(k) {
+    if (!dayData[k]) dayData[k] = { edit: null, video: false, project: false };
+    dayData[k].project = !dayData[k].project;
+    save();
+    updateStats();
+    renderCurrentTab();
+    openModal(k); // Modal'ı refresh et
+    showToast(dayData[k].project ? '🔨 Proje olarak işaretlendi!' : '🔨 Proje işareti kaldırıldı',
+              dayData[k].project ? 'success' : 'info');
 }
 
 // ─── TOAST ───────────────────────────────────────────────────────────────────
